@@ -27,13 +27,15 @@ public class MenuController {
     public ResponseEntity<?> addMenu(@RequestBody Menu data){
         Menu menu = menuRepo.save(data);
 //        return new ResponseEntity<>(menu, HttpStatus.OK);
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("status",200,"message","Order Place Successfully","data",menu));
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("status",201,"message","Menu Created Successfully","data",menu));
     }
 
     @PutMapping("/updateMenu/{id}")
-    public ResponseEntity<Menu> updateMenuById(@PathVariable("id") Integer id, @RequestBody Menu data){
+    public ResponseEntity<?> updateMenuById(@PathVariable("id") Integer id, @RequestBody Menu data){
         Menu menu = menuService.updateMenuById(id, data);
-        return new ResponseEntity<>(menu, HttpStatus.OK);
+        // return new ResponseEntity<>(menu, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("status",200,"message","Menu Updated Successfully","data",menu));
+    
     }
 
     @DeleteMapping("/delMenu/{id}")
@@ -97,3 +99,4 @@ public class MenuController {
 
     }
 }
+
